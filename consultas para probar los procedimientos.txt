@@ -1,0 +1,17 @@
+EXEC SP_Agregar_Sucursal 'Central tocoa', 'Tocoa, Colon'
+
+SELECT * FROM Sucursales
+
+EXEC SP_Eliminar_Sucursal '1'
+
+EXEC SP_Agregar_Empleado 'Liz', 'Perez', '2', '20000.00'
+
+SELECT * FROM Empleados
+
+EXEC SP_Eliminar_Empleado '2'
+
+INSERT INTO Usuarios(usuario, pass) VALUES ('abc', '123')
+
+SELECT * FROM Usuarios
+
+EXEC SP_Actualizar_Pass '1', 'contra321'

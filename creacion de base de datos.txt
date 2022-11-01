@@ -1,0 +1,73 @@
+create database ExamenRAD
+
+GO
+
+use ExamenRAD;
+
+GO
+
+create table Usuarios (
+id INT IDENTITY PRIMARY KEY,
+usuario varchar(50) NOT NULL,
+pass varchar(50) NOT NULL,
+)
+
+GO
+
+create table Sucursales (
+id INT IDENTITY PRIMARY KEY,
+nombre_sucursal varchar(50) NOT NULL,
+ubicacion varchar(100) NOT NULL,
+)
+
+GO
+
+create table Empleados (
+id INT IDENTITY PRIMARY KEY,
+nombre varchar(50) NOT NULL,
+apellido varchar(50),
+id_sucursal INT NOT NULL,
+sueldo MONEY,
+)
+
+GO
+
+CREATE PROC SP_Agregar_Sucursal
+@NombreSucursal as varchar(50),
+@UbicacionSucursal as varchar(100)
+AS
+INSERT INTO Sucursales(nombre_sucursal, ubicacion) VALUES (@NombreSucursal, @UbicacionSucursal);
+
+GO
+
+CREATE PROC SP_Eliminar_Sucursal
+@Id as INT
+AS
+DELETE FROM Sucursales WHERE id = @Id;
+
+GO
+
+CREATE PROC SP_Agregar_Empleado
+@Nombre as varchar(50),
+@Apellido as varchar(50),
+@IdSucursal as INT,
+@Sueldo as MONEY
+AS
+INSERT INTO Empleados(nombre, apellido, id_sucursal, sueldo) VALUES(@Nombre, @Apellido, @IdSucursal, @Sueldo);
+
+GO
+
+CREATE PROC SP_Eliminar_Empleado
+@Id as INT
+as
+DELETE FROM Empleados WHERE id = @Id
+
+GO
+
+CREATE PROC SP_Actualizar_Pass
+@IdUsuario as INT,
+@Pass as varchar(50)
+AS
+UPDATE Usuarios set pass = @Pass WHERE id = @IdUsuario;
+
+GO
